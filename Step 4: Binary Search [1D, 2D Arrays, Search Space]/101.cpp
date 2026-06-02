@@ -4,7 +4,7 @@ class Solution {
 public:
     bool isValid(int mid, vector<int>& nums, int k){
         int sum = 0;
-        int count = 1;
+        int count = 1; // subArray Count
         for(int x : nums){
             if(sum + x > mid){
                 count++;
