@@ -35,6 +35,42 @@ int atMostKDistinct(string s, int k) {
 }
 
 // TLE Free Using Vector to avoid map overhead
+class Solution {
+public:
+    int atMostKDistinct(string &s, int k) {
+        vector<int> freq(26, 0);
+
+        int left = 0;
+        int distinct = 0;
+        int ans = 0;
+
+        for (int right = 0; right < s.size(); right++) {
+
+            if (freq[s[right] - 'a'] == 0)
+                distinct++;
+
+            freq[s[right] - 'a']++;
+
+            while (distinct > k) {
+                freq[s[left] - 'a']--;
+
+                if (freq[s[left] - 'a'] == 0)
+                    distinct--;
+
+                left++;
+            }
+
+            ans += right - left + 1;
+        }
+
+        return ans;
+    }
+
+    int countSubstr(string &s, int k) {
+        return atMostKDistinct(s, k) -
+               atMostKDistinct(s, k - 1);
+    }
+};
 
 // Function to count substrings with exactly k distinct characters
 int countSubstrings(string s, int k) {
