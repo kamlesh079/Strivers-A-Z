@@ -2,50 +2,61 @@
 
 class Solution {
   public:
-    vector<string> ans;
-
-    void solve(int row, int col, vector<vector<int>>& maze, int n, string path, vector<vector<int>>& vis) {
-
-        if (row == n - 1 && col == n - 1) {
+    
+    void solve(int row, int col, vector<string>& ans, string& path, vector<vector<int>>& maze){
+        int n = maze.size();
+        if(row == n - 1 && col == n - 1){
             ans.push_back(path);
             return;
         }
-
-        vis[row][col] = 1;
-
+        // mark curr visited
+        maze[row][col] = 0;
+        
         // Down
-        if (row + 1 < n && maze[row + 1][col] == 1 && !vis[row + 1][col]) {
-            solve(row + 1, col, maze, n, path + 'D', vis);
+        if(row + 1 < n && maze[row + 1][col]){
+            path.push_back('D');
+            solve(row + 1, col, ans, path, maze);
+            path.pop_back();
         }
-
-        // Left
-        if (col - 1 >= 0 && maze[row][col - 1] == 1 && !vis[row][col - 1]) {
-            solve(row, col - 1, maze, n, path + 'L', vis);
+        
+        // left
+        if(col - 1 >= 0 && maze[row][col - 1]){
+            path.push_back('L');
+            solve(row, col - 1, ans, path, maze);
+            path.pop_back();
         }
-
-        // Right
-        if (col + 1 < n && maze[row][col + 1] == 1 && !vis[row][col + 1]) {
-            solve(row, col + 1, maze, n, path + 'R', vis);
+        
+        // right
+        if(col + 1 < n && maze[row][col + 1]){
+            path.push_back('R');
+            solve(row, col + 1, ans, path, maze);
+            path.pop_back();
         }
-
-        // Up
-        if (row - 1 >= 0 && maze[row - 1][col] == 1 && !vis[row - 1][col]) {
-            solve(row - 1, col, maze, n, path + 'U', vis);
+        
+        // UP
+        if(row - 1 >= 0 && maze[row - 1][col]){
+            path.push_back('U');
+            solve(row - 1, col, ans, path, maze);
+            path.pop_back();
         }
-
-        vis[row][col] = 0; // backtrack
+        
+        maze[row][col] = 1;// backtrack;
     }
-
+    
     vector<string> ratInMaze(vector<vector<int>>& maze) {
-         int n = maze.size();
-
-        if (maze[0][0] == 0)
-            return {};
-
-        vector<vector<int>> vis(n, vector<int>(n, 0));
-
-        solve(0, 0, maze, n, "", vis);
-
+        int n = maze.size();
+        vector<string> ans;
+        
+         if (n == 0 || maze[0][0] == 0 || maze[n-1][n-1] == 0)
+            return ans;
+        
+        string path = "";
+        
+        solve(0, 0, ans, path, maze);
+        
+        // DLRU -> if this is followed then no sorting need else sorting will required
+        // sort(ans.begin(), ans.end());
+        
         return ans;
         
     }
