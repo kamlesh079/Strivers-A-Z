@@ -47,7 +47,7 @@ class Solution {
         int n = maze.size();
         vector<string> ans;
         
-         if (n == 0 || maze[0][0] == 0 || maze[n-1][n-1] == 0)
+        if (n == 0 || maze[0][0] == 0 || maze[n-1][n-1] == 0)
             return ans;
         
         string path = "";
