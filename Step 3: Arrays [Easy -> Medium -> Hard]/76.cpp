@@ -32,7 +32,9 @@ class Solution {
     
     int mergeSort(int l, int h, vector<int> &arr){
         int count = 0;
-        if(l >= h) return count; // here mistake
+
+        if(l >= h) return count;
+
         int mid = l + (h - l)/2;
         count += mergeSort(l, mid, arr);
         count += mergeSort(mid + 1, h, arr);
@@ -41,6 +43,6 @@ class Solution {
     }
     int inversionCount(vector<int> &arr) {
         return mergeSort(0, arr.size() - 1, arr);
-        
+ 
     }
 };

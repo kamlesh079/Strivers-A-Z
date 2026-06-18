@@ -50,6 +50,7 @@ class Solution {
 };
 
 // Optimal - Gap Method (similar to Shell Sort)
+// Gap Method is used to reduce the number of comparisons and swaps required to sort an array. The idea is to compare elements that are far apart and gradually reduce the gap between them until the entire array is sorted. This method is particularly useful for merging two sorted arrays in place without using extra space.
 class Solution {
   public:
     int nextgap(int n){
