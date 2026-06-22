@@ -62,7 +62,7 @@ public:
 
         Node* node = mp[key];
 
-        // latest used Node ==> 
+        // latest used
         remove(node);
         insertAtEnd(node);
 
