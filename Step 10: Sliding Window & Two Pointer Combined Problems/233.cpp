@@ -28,3 +28,6 @@ public:
         return ans;
     }
 };
+
+// Note:
+// The current window may be invalid, but ans is still safe because that same length was already achievable (or will become achievable) due to the earlier occurrence that created the stale maxFreq.
